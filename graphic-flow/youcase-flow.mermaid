@@ -1,0 +1,30 @@
+graph TD
+    Start(Inicio) --> Welcome[Saludo y bienvenida]
+    Welcome --> UserInformation[Recopilar información del usuario]
+    UserInformation --> MainMenu{Menú principal: \n Qué necesita el usuario?}
+    MainMenu -->|"1. Productos"| ProductSelection[Selección de productos]
+    ProductSelection --> Catalog[Mostrar catálogo de productos]
+    Catalog -- "Elige producto" --> Confirm[Confirmar producto]
+    Confirm -- "Acepta" --> GenerateTicket[Generar ticket]
+    GenerateTicket --> Farewell[Despedida y agradecimientos]
+    Farewell --> End(Fin.)
+    Confirm -- "No Acepta" --> Decision{Qué desea<br>hacer el usuario?}
+    Decision -- "Retroceder" --> Catalog
+    Decision -- "Menu principal" --> MainMenu
+    MainMenu -->|"2. Servicio de reparación"| AskPhotos[Solicitar fotos del producto a reparar]
+    AskPhotos --> ExpertReview[Experto evalúa y realiza cotización]
+    ExpertReview --> InformPrice[Informar al usuario sobre la cotización]
+    InformPrice -- "Acepta" --> DeliveryOrganize[Organizar recogida delivery]
+    DeliveryOrganize --> GenerateRepairTicket[Generar ticket de reparación]
+    GenerateRepairTicket --> Farewell
+    InformPrice -- "No Acepta" --> Negotiation[Negociar el precio]
+    Negotiation -- "Ofrece hasta un 20% de descuento" --> Decision2{Usuario acepta<br>la nueva propuesta?}
+    Decision2 -- "Acepta" --> DeliveryOrganize
+    Decision2 -- "No Acepta" --> Farewell
+    MainMenu -->|"3. Seguimiento"| TicketCheck[El usuario ha realizado algún ticket de atención]
+    TicketCheck -- "Sí, proporciona número de ticket" --> FoundTicket[Informar sobre el proceso de atención]
+    FoundTicket --> Farewell
+    TicketCheck -- "Número de ticket incorrecto" --> AskForDNI[Solicitar DNI para búsqueda]
+    TicketCheck -- "No" --> AskForDNI
+    AskForDNI -- "Ingresó DNI y se encontró registro" --> FoundTicket
+    AskForDNI -- "Ingresó DNI y no hay registro" --> Farewell
